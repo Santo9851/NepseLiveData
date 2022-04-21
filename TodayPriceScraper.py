@@ -2,6 +2,8 @@
 import pandas as pd
 import time
 import json
+import os
+from selenium.webdriver.chrome.options import Options
 
 url = 'https://www.nepalstock.com.np/today-price'
 path = '//table[@class="table table__lg table-striped table__border table__border--bottom"]'
@@ -11,12 +13,17 @@ path = '//table[@class="table table__lg table-striped table__border table__borde
 def openchrome():
     from selenium import webdriver
     from selenium.webdriver.chrome.service import Service
-    
+    from selenium.common.exceptions import NoSuchElementException, WebDriverException
+
+    option = Options()
+    option.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
     #open browser
-    opt = webdriver.ChromeOptions()
-    opt.add_argument('headless')
-    serv = Service("C:\webdriver\chromedriver.exe")
-    browser = webdriver.Chrome(service=serv, options=opt)
+    #options = option()
+    option.add_argument('--disable-gpu')
+    option.add_argument('--no-sandbox')
+    option.add_argument('--headless')
+    #serv = Service("C:\webdriver\chromedriver.exe")
+    browser = webdriver.Chrome(executable_path=str(os.environ.get('CHROMEDRIVER_PATH')), chrome_options=option)
     return browser
     
 
