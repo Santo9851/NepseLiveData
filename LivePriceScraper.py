@@ -24,7 +24,7 @@ def openchrome():
     options.binary_location = GOOGLE_CHROME_BIN
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
-    #options.headless = True
+    options.add_argument('--headless')
     #serv = Service("C:\webdriver\chromedriver.exe")
     browser = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, options=options)
     return browser
