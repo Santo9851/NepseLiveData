@@ -11,12 +11,17 @@ path = '//table[@class="table table__lg table-striped table__border table__borde
 def openchrome():
     from selenium import webdriver
     from selenium.webdriver.chrome.service import Service
-    
+
+    CHROMEDRIVER_PATH = os.environ.get('CHROMEDRIVER_PATH', '/usr/local/bin/chromedriver')
+    GOOGLE_CHROME_BIN = os.environ.get('GOOGLE_CHROME_BIN', '/usr/bin/google-chrome')
     #open browser
-    opt = webdriver.ChromeOptions()
-    opt.add_argument('headless')
-    serv = Service("C:\webdriver\chromedriver.exe")
-    browser = webdriver.Chrome(service=serv, options=opt)
+    options = Options()
+    options.binary_location = GOOGLE_CHROME_BIN
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.headless = True
+    #serv = Service("C:\webdriver\chromedriver.exe")
+    browser = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, options=options)
     return browser
     
 
