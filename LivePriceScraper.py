@@ -15,6 +15,7 @@ path = '//div/table'
 def openchrome():
     from selenium import webdriver
     from selenium.webdriver.chrome.service import Service
+    from selenium.common.exceptions import NoSuchElementException, WebDriverException
 
     CHROMEDRIVER_PATH = os.environ.get('CHROMEDRIVER_PATH', '/usr/local/bin/chromedriver')
     GOOGLE_CHROME_BIN = os.environ.get('GOOGLE_CHROME_BIN', '/usr/bin/google-chrome')
